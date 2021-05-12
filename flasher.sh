@@ -32,15 +32,13 @@ echo "in" > /sys/class/gpio/gpio${READY_TO_FLASH_GPIO}/direction
 echo "out" > /sys/class/gpio/gpio${FLASH_OK_GPIO}/direction
 echo "in" > /sys/class/gpio/gpio${ATT_VCC_GPIO}/direction
 
-# FLASH_OK is raised when flasher is ready for action
-echo "1" > /sys/class/gpio/gpio${FLASH_OK_GPIO}/value
-
 while true; do
     # ensure that ATT_VCC is off
     echo "in" > /sys/class/gpio/gpio${ATT_VCC_GPIO}/direction
+    # FLASH_OK is raised when flasher is ready for action
+    echo "1" > /sys/class/gpio/gpio${FLASH_OK_GPIO}/value
 
-    echo "Waiting for DUT"
-    sleep 2
+    sleep 1
 
     if [ $(cat /sys/class/gpio/gpio${READY_TO_FLASH_GPIO}/value) -eq "1" ] ; then
         echo "DUT present; flashing."
