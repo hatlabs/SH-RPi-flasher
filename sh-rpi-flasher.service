@@ -1,0 +1,14 @@
+[Unit]
+Description=SH-RPi Flasher
+After=syslog.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=pi
+ExecStart=/home/pi/SH-RPi-flasher/flasher.sh
+
+[Install]
+WantedBy=multi-user.target
